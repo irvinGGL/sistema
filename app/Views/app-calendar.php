@@ -38,7 +38,7 @@
 
 </head>
 <body class="dark layout-boxed">
-    <?php include 'calendar/config.php';
+    <?php include 'config.php';
      $SqlEventos   = ("SELECT * FROM eventos");
      $resulEventos = mysqli_query($con, $SqlEventos);
      ?>
@@ -952,7 +952,7 @@
                                 </script>
                             <?php } ?>
                             <div class="calendar-container">
-                                <div class="calendar" id="calendar"></div>
+                                <div class="calendar"></div>
                                 
                             </div>
                         </div>
@@ -1032,7 +1032,7 @@
                                     <button type="submit" class="btn btn-primary btn-add-event">Agregar evento</button>
                                     </form>
                                     <form action="./deleteEvento" method="post">
-                                    <button type="submit" onclick="clicked()" class="btn btn-warning" id="btn-delete-event" value="" name ="eliminar">Eliminar</button>
+                                    <button type="submit" class="btn btn-warning" id="btn-delete-event" value="" name ="eliminar">Eliminar</button>
                                     </form>
                                     
                                 </div>
@@ -1045,13 +1045,13 @@
                 </div>
                 
             </div>
+            
             <script type="text/javascript">
                 document.addEventListener('DOMContentLoaded', function() {
 
-    
-                    
                 // Date variable
                 var newDate = new Date();
+
                 /** 
                  * 
                  * @getDynamicMonth() fn. is used to validate 2 digit number and act accordingly 
@@ -1067,7 +1067,7 @@
                 }
                 
                 console.log(getDynamicMonth())
- 
+                
                 // Modal Elements
                 var getModalTitleEl = document.querySelector('#evento');
                 var getCheck = document.querySelector('#rwork');
@@ -1252,8 +1252,10 @@
                     if (getCheck !== null) { getModalIfCheckedRadioBtnEl.checked = true; }
                 })
                 });
-
+ 
             </script>
+
+
             <!--  BEGIN FOOTER  -->
             <div class="footer-wrapper">
                 <div class="footer-section f-section-1">

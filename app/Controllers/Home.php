@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use CodeIgniter\Controller;
 use App\Models\Usuario;
+use App\Models\Evento;
 
 class Home extends BaseController
 {
@@ -40,7 +41,49 @@ class Home extends BaseController
 
     public function calendar()
     {
-        return view('calendar');
+        return view('app-calendar');
+    }
+
+    public function detallesEvento()
+    {
+        $actualizar = $this->request->getPost("actualizar");
+        echo 'Valor de actualizar: '.$actualizar;
+        $evento = new Evento();
+        if($actualizar == ""){
+            $fechaFin = $this->request->getPost("event-end-date");
+            echo 'Valor de fechaFin: '.$fechaFin;
+                $data = [
+                    'id' => '',
+                    'evento' => $this->request->getPost("evento"),
+                    'tipo' => $this->request->getPost("event-level"),
+                    'fechaInicio' => $this->request->getPost("event-start-date"),
+                    'fechaFin' => $this->request->getPost("event-end-date")
+                ];
+                $evento->insert($data);
+                $session = session();
+                $session->setFlashData('mensaje','Evento agregado correctamente.');
+                return redirect()->to(base_url('/index-Secretario-Agente/calendar'))->withInput();
+        } else{
+            $update = [
+                'evento' => $this->request->getPost("evento"),
+                'tipo' => $this->request->getPost("event-level"),
+            ];
+            $evento->update($actualizar,$update);
+            $session = session();
+            $session->setFlashData('mensaje','Evento modificado correctamente.');
+            return redirect()->to(base_url('/index-Secretario-Agente/calendar'))->withInput();
+        }
+        
+    }
+
+    public function deleteEvento(){
+        $id = $this->request->getPost("eliminar");
+        echo $id;
+        $evento = new Evento();
+        $evento->where('id',$id)->delete($id); 
+        $session = session();
+        $session->setFlashData('mensaje','Evento eliminado correctamente.');
+        return redirect()->to(base_url('/index-Secretario-Agente/calendar'));
     }
 
     public function login(){
@@ -60,7 +103,7 @@ class Home extends BaseController
                 return redirect()->to(base_url('/indexAgente'));
             }else if($cargo == 'Secretario del agente municipal'){
                 return redirect()->to(base_url('/index-Secretario-Agente'));
-            }
+            } 
             
         } else{
             $session = session();

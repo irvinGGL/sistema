@@ -74,7 +74,6 @@
                                     <div class="col-md-12">
                                         <div class="mb-3">
                                             <label class="form-label">Cargo</label>
-                                            <?=old('cargo') ?>
                                             <br>
                                             <select id="selectCargo" name="cargo" class="form-control">
                                             {<?php if(session('mensaje')){ ?>

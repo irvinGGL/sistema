@@ -64,4 +64,6 @@ $routes->post('/login', 'Home::login');
 $routes->get('/logOut', 'Home::logOut');
 $routes->get('/index-Secretario-Agente/user-profile', 'Home::userProfile');
 $routes->get('/index-Secretario-Agente/calendar', 'Home::calendar');
+$routes->post('/index-Secretario-Agente/detallesEvento', 'Home::detallesEvento');
+$routes->post('/index-Secretario-Agente/deleteEvento', 'Home::deleteEvento');
 //$routes->get('/user-profile', 'Home::userProfile');
